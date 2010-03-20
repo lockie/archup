@@ -1,0 +1,6 @@
+archup-1.2 ()
+	* added manpage
+	* added $DESTDIR support in the make install and make uninstall commands
+		example: $ sudo make DESTDIR=/tmp install
+archup-1.1 (21.03.2010)
+archup-1.0 (no public release)
