@@ -1,0 +1,39 @@
+# Copyright 2010 Rorschach <r0rschach@lavabit.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+
+CC = @CC@
+VERSION = @VERSION@
+CFLAGS = @CFLAGS@
+LIBS = @LIBS@
+
+all: archup-bin
+
+archup-bin: archup.c
+	$(CC) $(CFLAGS) -DVERSION=\"$(VERSION)\" `pkg-config --cflags --libs gtk+-2.0` archup.c -o archup $(LIBS)
+
+install:
+	install -Dm755 archup /usr/bin/archup
+	install -Dm744 README /usr/share/doc/archup/README
+	install -Dm744 INSTALL /usr/share/doc/archup/INSTALL
+	install -Dm744 COPYING /usr/share/doc/archup/COPYING
+	install -Dm744 VERSION /usr/share/doc/archup/VERSION
+	install -Dm744 cronhourly.example /usr/share/doc/archup/cronhourly.example
+
+uninstall:
+	rm -f /usr/bin/archup
+	rm -rf /usr/share/doc/archup
+
+distclean:
+	rm -rf archup autoscan.log autom4te.cache Makefile configure.scan configure config.*
