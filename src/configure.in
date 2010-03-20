@@ -37,6 +37,12 @@ if test "$pacman_found" != "ok";then
 	AC_MSG_ERROR([Missing pacman!])
 fi
 
+AC_CHECK_PROG([gzip_found],[gzip],ok,no)
+
+if test "$gzip_found" != "ok";then
+        AC_MSG_ERROR([Missing gzip, can't compress manpages!])
+fi
+
 
 AC_COPYRIGHT([archup is licensed under the GPL, version 3 or higher.])
 
