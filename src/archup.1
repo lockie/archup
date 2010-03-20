@@ -1,0 +1,40 @@
+.TH "archup" "1" "MARCH 2010" "Rorschach <r0rschach@lavabit.com>" ""
+.SH "NAME"
+archup \- lightweight pacman update notifier
+.SH "SYNOPSIS"
+\fIarchup\fR
+.SH "DESCRIPTION"
+archup is a small (just 44 lines of code) C application which informs the user when system\-updates for Archlinux are available. It's licenced under the GPLv3. In contrast to other update notifiers archup is intended to be lightweight and just do what it should: notify about possible updates.
+
+archup uses GTk+ and libnotify to show a desktop notification if updates are available. It uses pacman to get the list of the pending updates. A cronjob updates the database and executes archup.
+.SH "CONFIGURATION"
+You should start archup regulary with a cronjob after refreshing the packagedatabase with "pacman \-Sy".
+
+You could put something like this into /etc/cron.hourly (the example can also be found in \fB/usr/share/doc/archup/cronhourly.example\fR):
+
+#!/bin/bash
+
+arch_user=rorschach
+
+if [ \-z "$(pgrep pacman)" ];then
+        /usr/bin/pacman \-Sy > /dev/null
+fi
+
+XAUTHORITY=/home/$arch_user/.Xauthority DISPLAY=:0.0 /usr/bin/archup
+.SH "BUGS"
+Bugs? If you find one, send an email to r0rschach@lavabit.com
+.SH "COPYRIGHT"
+Copyright 2010 Rorschach <r0rschach@lavabit.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>. 
