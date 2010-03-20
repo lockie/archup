@@ -24,16 +24,16 @@ archup-bin: archup.c
 	$(CC) $(CFLAGS) -DVERSION=\"$(VERSION)\" `pkg-config --cflags --libs gtk+-2.0` archup.c -o archup $(LIBS)
 
 install:
-	install -Dm755 archup /usr/bin/archup
-	install -Dm744 README /usr/share/doc/archup/README
-	install -Dm744 INSTALL /usr/share/doc/archup/INSTALL
-	install -Dm744 COPYING /usr/share/doc/archup/COPYING
-	install -Dm744 VERSION /usr/share/doc/archup/VERSION
-	install -Dm744 cronhourly.example /usr/share/doc/archup/cronhourly.example
+	install -Dm755 archup $(DESTDIR)/usr/bin/archup
+	install -Dm744 README $(DESTDIR)/usr/share/doc/archup/README
+	install -Dm744 INSTALL $(DESTDIR)/usr/share/doc/archup/INSTALL
+	install -Dm744 COPYING $(DESTDIR)/usr/share/doc/archup/COPYING
+	install -Dm744 VERSION $(DESTDIR)/usr/share/doc/archup/VERSION
+	install -Dm744 cronhourly.example $(DESTDIR)/usr/share/doc/archup/cronhourly.example
 
 uninstall:
-	rm -f /usr/bin/archup
-	rm -rf /usr/share/doc/archup
+	rm -f $(DESTDIR)/usr/bin/archup
+	rm -rf $(DESTDIR)/usr/share/doc/archup
 
 distclean:
 	rm -rf archup autoscan.log autom4te.cache Makefile configure.scan configure config.*
