@@ -1,0 +1,26 @@
+# Contributor: Rorschach <r0rschach@lavabit.com>
+
+pkgname=archup
+pkgver=1.1
+pkgrel=1
+pkgdesc="Small and lightweight update-notifier for archlinux."
+url="https://code.launchpad.net/~r0rschach/+junk/archup"
+arch=('i686' 'x86_64')
+license="GPL"
+depends=('pacman' 'libnotify')
+makedepends=('libnotify' 'autoconf')
+source=(http://bazaar.launchpad.net/%7Er0rschach/%2Bjunk/archup/download/r0rschach%40lavabit.com-20100320180744-y0jw6cure6t9l3pw/archup1.1.tar.gz-20100320180743-4r662d1lv6l8v8f1-1/$pkgname-$pkgver.tar.gz)
+md5sums=('f1c5d4946c9e0f212a776818e8594415')
+
+build() {
+	cd src
+	autoconf || return 1
+	./configure || return 1
+	make || return 1
+	install -Dm755 archup $pkgdir/usr/bin/archup
+	install -Dm744 README $pkgdir/usr/share/doc/archup/README
+	install -Dm744 INSTALL $pkgdir/usr/share/doc/archup/INSTALL
+	install -Dm744 COPYING $pkgdir/usr/share/doc/archup/COPYING
+	install -Dm744 VERSION $pkgdir/usr/share/doc/archup/VERSION
+	install -Dm744 cronhourly.example $pkgdir/usr/share/doc/archup/cronhourly.example
+}
