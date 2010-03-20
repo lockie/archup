@@ -34,6 +34,7 @@ install:
 	install -Dm744 INSTALL $(DESTDIR)/usr/share/doc/archup/INSTALL
 	install -Dm744 COPYING $(DESTDIR)/usr/share/doc/archup/COPYING
 	install -Dm744 VERSION $(DESTDIR)/usr/share/doc/archup/VERSION
+	install -Dm744 CHANGELOG $(DESTDIR)/usr/share/doc/archup/CHANGELOG
 	install -Dm744 cronhourly.example $(DESTDIR)/usr/share/doc/archup/cronhourly.example
 	install -Dm644 archup.1.gz $(DESTDIR)/usr/share/man/man1/archup.1.gz
 
