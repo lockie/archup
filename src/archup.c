@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <libnotify/notify.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define NUMBER_OUT 30
 #define LIBNOTIFY_TIMEOUT 3600000 /* 60min */
-#define MAX_LINE_LENGTH 50
 
 int main(int argc, char **argv)
 {
@@ -33,26 +33,31 @@ int main(int argc, char **argv)
         NotifyNotification *my_notify;
         GError *error = NULL;
 
+        /* those are needed for the output */
+	char *output_string=malloc(23); 
+	sprintf(output_string,"There are updates for:\n");
 	bool got_updates = FALSE;
-	char output_string[NUMBER_OUT*MAX_LINE_LENGTH+100] = "There are updates for:\n";
-	char line[MAX_LINE_LENGTH];
-	int  i=0;
-	FILE *pac_out;
 
+	/* those are needed for getting the list of updates */
+	FILE *pac_out;
+	int llen = 0;
+	char line[BUFSIZ];
+
+  
         pac_out = popen("/usr/bin/pacman -Qu","r");
-        while ( fgets( line, sizeof line, pac_out) != NULL )
-        {
-		i++;
-		if (i >= NUMBER_OUT)
-		{
-			strncat(output_string," - ...\0 ",7);
-			break;
-		}
+
+	while (fgets(line,BUFSIZ,pac_out) != NULL) 
+	{
 		got_updates = TRUE;
-		strncat(output_string," - ",3);
-		strncat(output_string,line,50);
-        }
-        pclose(pac_out);
+
+		llen = strlen(line);
+		output_string = (char *)realloc(output_string,strlen(output_string)+llen);
+		strncat(output_string,"- ",2);
+		strncat(output_string,line,llen);
+	}
+
+	pclose(pac_out);
+
 
 	if (got_updates == TRUE)
 	{
