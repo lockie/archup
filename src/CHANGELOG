@@ -1,4 +1,5 @@
 archup-1.2 ()
+	* replaced static memory-managment with dynamic reallocs
 	* added manpage
 	* added $DESTDIR support in the make install and make uninstall commands
 		example: $ sudo make DESTDIR=/tmp install
