@@ -38,7 +38,7 @@ int print_help(char *name)
 /* Prints the version. */
 int print_version()
 {
-        printf("archup 1.1\n\n");
+        printf("archup 1.2\n\n");
 	printf("licence: GPLv3\n");
 	printf("copyright 2010 Rorschach <r0rschach@lavabit.com>\n");
         exit(0);
