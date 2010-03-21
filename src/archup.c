@@ -30,7 +30,7 @@ int print_help(char *name)
 	printf("          --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.\n");
 	printf("                                      The default value is 3600 seconds, which is 1 hour.\n");
 	printf("          --help                      Prints this help.\n");
-	printf("          --version                   Shows the version\n");
+	printf("          --version                   Shows the version.\n");
 	printf("\nMore informations can be found in the manpage.\n");
 	exit(0);
 }
