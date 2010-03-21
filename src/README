@@ -1,8 +1,6 @@
-archup (https://code.launchpad.net/~r0rschach/+junk/archup) is a small C application which informs the user when system-updates for Archlinux are available.
+archup  is  a small C application which informs the user when system-updates for Archlinux are available. It's licenced under the GPLv3. In contrast to other update notifiers archup is intended to be lightweight and just do what it should: notify about possible updates.
 
-archup uses GTk+ and libnotify to show a desktop notification if updates are available. It uses "pacman -Qu"
-to get the list of the pending updates. You have to update the database yourself with "pacman -Sy". You can setup
-a cronjob, executing "pacman -Sy" hourly and executing archup afterwards.
+archup uses GTk+ and libnotify to show a desktop notification if updates are available. It follows the unix-philosophy of "just doing one thing, but doing  it  well".  It just notifies about new updates but the packagedatabase has to be updated by the user (better said a cronjob). With a cronjob archup can be used to regulary check for new updates and get a desktop notification if there are some.
 
 
 Bugs

@@ -13,10 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+We need autoconf,gzip(for zipping the man page) and libevent for building archup. At runtime we need pacman and libevent.
 
-archup has autoconf and libevent as make-dependencies and needs pacman and libevent at runtime.
-
-To compile archup first untar the archive.Then create the configure-script:
+Create the configure-script:
         $ autoconf
 ,execute it
         $ ./configure
@@ -26,3 +25,5 @@ and finally install it
         $ make install
 
 this installs the binary to /usr/bin/archup and the other files to /usr/share/doc/archup.
+
+Now read the man page for the configuration.
