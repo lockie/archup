@@ -4,7 +4,7 @@ archup \- lightweight pacman update notifier
 .SH "SYNOPSIS"
 \fIarchup\fR [options]
 .SH "DESCRIPTION"
-archup is a small C application which informs the user when system\-updates for Archlinux are available. It's licenced under the GPLv3. In contrast to other update notifiers archup is intended to be lightweight and just do what it should: notify about possible updates.
+archup is a small C application which informs the user when system\-updates for Archlinux are available. It's licenced under the GPLv3. In contrast to other update notifiers archup is intended to be lightweight and just do what it should, notify about possible updates.
 
 archup uses GTk+ and libnotify to show a desktop notification if updates are available. It follows the unix-philosophy of "just doing one thing, but doing it well". It just notifies about new updates but the packagedatabase has to be updated by the user (better said a cronjob). With a cronjob archup can be used to regulary check for new updates and get a desktop notification if there are some.
 .SH "OPTIONS"
@@ -27,7 +27,7 @@ and make it executable with
 .PP
           $ sudo chmod 755 /etc/cron.hourly/archup.sh
 .PP 
-Finally open this file with a texteditor with your choice and change the username of the arch_user value with your username.
+Finally open this file with a texteditor of your choice and change the username of the arch_user value with your username.
 
 Now every hour your package database will get updated and after that archup will be executed. If there are updates archup shows a desktop notifiaction, if there are no updates nothing will happen. The desktop notification will automatically disappear after 60min or if you simply click on it.
 
