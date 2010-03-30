@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <unistd.h>
 
 /* Prints the help. */
 int print_help(char *name)
@@ -32,8 +33,11 @@ int print_help(char *name)
         printf("                                      The default value is 30.\n");
 	printf("          --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.\n");
 	printf("                                      The default value is 3600 seconds, which is 1 hour.\n");
+        printf("          --uid|-i [value]            Set the uid of the process.\n");
+        printf("                                      The default is to keep the uid of the user who started archup.\n");
+        printf("                                      !!You should change this if root is executing archup!!\n");
 	printf("          --urgency|-u [value]        Set the libnotify urgency-level. Possible values are: low, normal and critical.\n");
-        printf("                                      The default value is normal.\n");
+        printf("                                      The default value is normal. With changing this value you can change the color of the notification.\n");
 	printf("          --help                      Prints this help.\n");
 	printf("          --version                   Shows the version.\n");
 	printf("\nMore informations can be found in the manpage.\n");
@@ -119,6 +123,17 @@ int main(int argc, char **argv)
                         if ( (argc-1 != i) )
                         {
 				command = argv[i+1];
+                        }
+                }
+                else if  ( strcmp(argv[i],"--uid") == 0 ||  strcmp(argv[i],"-i") == 0 )
+                {
+                        if ( (argc-1 != i) && isdigit(*argv[i+1]) )
+                        {
+                        	if ( setuid(atoi(argv[i+1])) != 0 )
+				{
+				printf("Couldn't change to the given uid!\n");
+				exit(1);
+				}
                         }
                 }
 	}
