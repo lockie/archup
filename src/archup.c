@@ -30,6 +30,8 @@ int print_help(char *name)
         printf("                                      The default value is 30.\n");
 	printf("          --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.\n");
 	printf("                                      The default value is 3600 seconds, which is 1 hour.\n");
+	printf("          --urgency|-u [value]        Set the libnotify urgency-level. Possible values are: low, normal and critical.\n");
+        printf("                                      The default value is normal.\n");
 	printf("          --help                      Prints this help.\n");
 	printf("          --version                   Shows the version.\n");
 	printf("\nMore informations can be found in the manpage.\n");
@@ -50,6 +52,7 @@ int print_version()
 int main(int argc, char **argv)
 {
 	typedef int bool;
+	NotifyUrgency urgency;
 
 
 	/* Default timeout-value is: 60 min (int timeout = 3600*1000;)
@@ -57,6 +60,8 @@ int main(int argc, char **argv)
 	int timeout = 3600*1000;
 	/* Restricts the number of packages which should be included in the desktop notification.*/
 	int max_number_out = 30;
+	/*Sets the urgency-level to normal*/
+	urgency = NOTIFY_URGENCY_NORMAL;
 
 	/* We parse the commandline options. */
 	int i;
@@ -82,14 +87,30 @@ int main(int argc, char **argv)
 		}
                 else if  ( strcmp(argv[i],"--maxentries") == 0 ||  strcmp(argv[i],"-m") == 0 )
                 {
-			 /* If argv[i] is not the last command line option (because
-                           if it is, there's no place left for the value) and the next
-                           value is a digit, we take this as new value */
                         if ( (argc-1 != i) && isdigit(*argv[i+1]) )
                         {
                                 max_number_out = atoi(argv[i+1]);
                         }
                 }
+                else if  ( strcmp(argv[i],"--urgency") == 0 ||  strcmp(argv[i],"-u") == 0 )
+                {
+                        if ( (argc-1 != i) )
+                        {
+				if ( strcmp(argv[i+1],"low") == 0 )
+				{
+					urgency=NOTIFY_URGENCY_LOW;
+				}
+				else if ( strcmp(argv[i+1],"normal") == 0 )
+                        	{
+                                	urgency=NOTIFY_URGENCY_NORMAL;
+                                }        
+				else if ( strcmp(argv[i+1],"critical") == 0 )
+                                {
+                                        urgency=NOTIFY_URGENCY_CRITICAL;
+                                }
+			}
+                }
+
 	}
 
 	/* Those are needed by libnotify. */
@@ -153,9 +174,10 @@ int main(int argc, char **argv)
 		my_notify = notify_notification_new("New updates for Archlinux available!",output_string,NULL,NULL);
 		/* Sets the timeout until the notification disappears. */
 		notify_notification_set_timeout(my_notify,timeout);
-		/* We set the category and urgencylevel. */
+		/* We set the category.*/
 		notify_notification_set_category(my_notify,category);
-		notify_notification_set_urgency (my_notify,NOTIFY_URGENCY_CRITICAL);
+		/* We set the urgency, which can be changed with a commandline option */
+		notify_notification_set_urgency (my_notify,urgency);
 		/* We finally show the notification, */	
 		notify_notification_show(my_notify,&error);
 		/* and deinitialize the libnotify afterwards. */
