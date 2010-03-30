@@ -26,6 +26,8 @@ int print_help(char *name)
 {
 	printf("Usage: %s [options]\n\n",name);
 	printf("Options:\n");
+	printf("          --command|-c [value]        Set the command which gives out the list of updates.\n");
+        printf("                                      The default is /usr/bin/pacman -Qu\n");
 	printf("          --maxentries|-m [value]     Set the maximum number of packages which shall be displayed in the notification.\n");
         printf("                                      The default value is 30.\n");
 	printf("          --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.\n");
@@ -62,6 +64,8 @@ int main(int argc, char **argv)
 	int max_number_out = 30;
 	/*Sets the urgency-level to normal*/
 	urgency = NOTIFY_URGENCY_NORMAL;
+
+	char *command = "/usr/bin/pacman -Qu";
 
 	/* We parse the commandline options. */
 	int i;
@@ -110,7 +114,13 @@ int main(int argc, char **argv)
                                 }
 			}
                 }
-
+                else if  ( strcmp(argv[i],"--command") == 0 ||  strcmp(argv[i],"-c") == 0 )
+                {
+                        if ( (argc-1 != i) )
+                        {
+				command = argv[i+1];
+                        }
+                }
 	}
 
 	/* Those are needed by libnotify. */
@@ -134,7 +144,7 @@ int main(int argc, char **argv)
 	   Remember we can't use fseek(stream,0,SEEK_END) with 
 	   popen-streams, thus we are reading BUFSIZ sized lines
 	   and allocate dynamically more memory for our output. */  
-        pac_out = popen("/usr/bin/pacman -Qu","r");
+        pac_out = popen(command,"r");
 
 	i = 0;
 	while (fgets(line,BUFSIZ,pac_out)) 
