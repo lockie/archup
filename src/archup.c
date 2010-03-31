@@ -66,9 +66,9 @@ int main(int argc, char **argv)
 	int timeout = 3600*1000;
 	/* Restricts the number of packages which should be included in the desktop notification.*/
 	int max_number_out = 30;
-	/*Sets the urgency-level to normal*/
+	/* Sets the urgency-level to normal. */
 	urgency = NOTIFY_URGENCY_NORMAL;
-
+	/* The default command to get a list of packages to update. */
 	char *command = "/usr/bin/pacman -Qu";
 
 	/* We parse the commandline options. */
