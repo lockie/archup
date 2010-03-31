@@ -8,16 +8,19 @@ archup is a small C application which informs the user when system\-updates for 
 
 archup uses GTk+ and libnotify to show a desktop notification if updates are available. It follows the unix-philosophy of "just doing one thing, but doing it well". It just notifies about new updates but the packagedatabase has to be updated by the user (better said a cronjob). With a cronjob archup can be used to regulary check for new updates and get a desktop notification if there are some.
 .SH "OPTIONS"
-      --command|-c [value]        Set the command which gives out the list of updates.
-                                  The default is "/usr/bin/pacman -Qu".
-      --maxentries|-m [value]     Set the maximum number of packages which shall be displayed in the notification.
-                                  The default value is 30.
-      --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.
-                                  The default value is 3600 seconds, which is 1 hour.
-      --urgency|-u [value]        Set the libnotify urgency-level. Possible values are: low, normal and critical.
-                                  The default value is normal.
-      --help                      Prints this help.
-      --version                   Shows the version.
+          --command|-c [value]        Set the command which gives out the list of updates.
+                                      The default is /usr/bin/pacman -Qu
+          --maxentries|-m [value]     Set the maximum number of packages which shall be displayed in the notification.
+                                      The default value is 30.
+          --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.
+                                      The default value is 3600 seconds, which is 1 hour.
+          --uid|-i [value]            Set the uid of the process.
+                                      The default is to keep the uid of the user who started archup.
+                                      !!You should change this if root is executing archup!!
+          --urgency|-u [value]        Set the libnotify urgency-level. Possible values are: low, normal and critical.
+                                      The default value is normal. With changing this value you can change the color of the notification.
+          --help                      Prints this help.
+          --version                   Shows the version.
 .SH "CONFIGURATION"
 archup can simply be invoked by executing it from the commandline. But you surely want to automate this task and let archup continouisly be run with a cronjob.
 
