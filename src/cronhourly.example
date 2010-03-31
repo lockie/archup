@@ -13,9 +13,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
-# put this file into /etc/cron.hourly and replace the username
+
+
+# put this file into /etc/cron.hourly and replace rorschach with your username
 
 arch_user=rorschach
 
