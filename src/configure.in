@@ -21,17 +21,7 @@ AC_PROG_CC
 
 AC_HEADER_STDBOOL
 
-AC_CHECK_HEADER([stdio.h],
-                [AC_DEFINE([HAVE_STDIO_H])],
-                [AC_MSG_ERROR([Sorry, can't do anything for you])])
-
-AC_CHECK_HEADER([string.h],
-                [AC_DEFINE([HAVE_STRING_H])],
-                [AC_MSG_ERROR([Sorry, can't do anything for you])])
-
-AC_CHECK_HEADER([stdlib.h],
-                [AC_DEFINE([HAVE_STDLIB_H])],
-                [AC_MSG_ERROR([Sorry, can't do anything for you])])
+AC_CHECK_FUNCS(setuid,, [AC_MSG_ERROR([Seems your unistd implementation doesn't support setuid])])
 
 AC_SEARCH_LIBS([notify_init],[notify],,AC_MSG_ERROR([Missing libnotify!]),)
 
@@ -46,7 +36,6 @@ AC_CHECK_PROG([gzip_found],[gzip],ok,no)
 if test "$gzip_found" != "ok";then
         AC_MSG_ERROR([Missing gzip, can't compress manpages!])
 fi
-
 
 AC_COPYRIGHT([archup is licensed under the GPL, version 3 or higher.])
 
