@@ -207,6 +207,8 @@ int main(int argc, char **argv)
 		notify_notification_show(my_notify,&error);
 		/* and deinitialize the libnotify afterwards. */
 		notify_uninit();
+		/* Should be safe now */
+		free(output_string);
 	}
 
 	return(0);
