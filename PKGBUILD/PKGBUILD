@@ -9,11 +9,11 @@ arch=('i686' 'x86_64')
 license="GPL"
 depends=('pacman' 'libnotify')
 makedepends=('libnotify' 'autoconf' 'gzip')
-source=(http://bazaar.launchpad.net/%7Er0rschach/%2Bjunk/archup/download/r0rschach%40lavabit.com-20100321172005-ey6j8lnsby7bz3e9/archup1.2.tar.gz-20100321172001-ijl2ccydymcfo0dr-1/archup-1.2.tar.gz)
-md5sums=('8b4ca75717bd581c483b67b90fcb581c')
+source=(http://mirrors.zerg.biz/nongnu/$pkgname/$pkgver/$pkgname-$pkgver.tar.gz)
+md5sums=('ce21a4e4818e89fd5050e79fabc8c387')
 
 build() {
-	cd src
+	cd $pkgname-$pkgver/src
 	autoconf || return 1
 	./configure || return 1
 	make || return 1
