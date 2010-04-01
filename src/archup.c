@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <ctype.h>
 #include <unistd.h>
 
-#define VERSION_NUMBER 1.2
+#define VERSION_NUMBER 1.3
 
 /* Prints the help. */
 int print_help(char *name)
