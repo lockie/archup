@@ -73,6 +73,8 @@ int main(int argc, char **argv)
 	/* The default command to get a list of packages to update. */
 	char *command = "/usr/bin/pacman -Qu";
 
+	gchar *icon = NULL;
+
 	/* We parse the commandline options. */
 	int i;
 	for (i=1;i<argc;i++)
@@ -138,6 +140,14 @@ int main(int argc, char **argv)
 				}
                         }
                 }
+                else if  ( strcmp(argv[i],"--icon") == 0 ||  strcmp(argv[i],"-p") == 0 )
+                {
+                        if ( (argc-1 != i) )
+                        {
+                                icon = argv[i+1];
+                        }
+                }
+
 	}
 
 	/* Those are needed by libnotify. */
@@ -198,7 +208,7 @@ int main(int argc, char **argv)
 			output_string[strlen(output_string)-1] = '\0';
 		}
 		/* Constructs the notification. */
-		my_notify = notify_notification_new("New updates for Archlinux available!",output_string,NULL,NULL);
+		my_notify = notify_notification_new("New updates for Archlinux available!",output_string,icon,NULL);
 		/* Sets the timeout until the notification disappears. */
 		notify_notification_set_timeout(my_notify,timeout);
 		/* We set the category.*/
