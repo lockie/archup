@@ -45,3 +45,4 @@ uninstall:
 
 distclean:
 	rm -rf archup autoscan.log autom4te.cache Makefile configure.scan configure config.*
+	gunzip archup.1.gz
