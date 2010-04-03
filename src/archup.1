@@ -10,6 +10,8 @@ archup uses GTk+ and libnotify to show a desktop notification if updates are ava
 .SH "OPTIONS"
           --command|-c [value]        Set the command which gives out the list of updates.
                                       The default is /usr/bin/pacman -Qu
+          --icon|-p [value]           Shows the icon, whose path has been given as value, in the notification.
+                                      By default no icon is shown.
           --maxentries|-m [value]     Set the maximum number of packages which shall be displayed in the notification.
                                       The default value is 30.
           --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.
