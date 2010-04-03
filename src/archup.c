@@ -31,6 +31,8 @@ int print_help(char *name)
 	printf("Options:\n");
 	printf("          --command|-c [value]        Set the command which gives out the list of updates.\n");
         printf("                                      The default is /usr/bin/pacman -Qu\n");
+	printf("          --icon|-p [value]           Shows the icon, whose path has been given as value, in the notification.\n");
+	printf("                                      By default no icon is shown.\n");
 	printf("          --maxentries|-m [value]     Set the maximum number of packages which shall be displayed in the notification.\n");
         printf("                                      The default value is 30.\n");
 	printf("          --timeout|-t [value]        Set the timeout after which the notification disappers in seconds.\n");
@@ -72,7 +74,7 @@ int main(int argc, char **argv)
 	urgency = NOTIFY_URGENCY_NORMAL;
 	/* The default command to get a list of packages to update. */
 	char *command = "/usr/bin/pacman -Qu";
-
+	/* The default icon to show: none */
 	gchar *icon = NULL;
 
 	/* We parse the commandline options. */
