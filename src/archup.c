@@ -1,5 +1,6 @@
 /* 
-Copyright 2010 Rorschach <r0rschach@lavabit.com>
+Copyright 2010 Rorschach <r0rschach@lavabit.com>,
+2011 Andrew Kravchuk <awkravchuk@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <ctype.h>
 #include <unistd.h>
 
-#define VERSION_NUMBER 1.3
+#define VERSION_NUMBER 1.4
 
 /* Prints the help. */
 int print_help(char *name)
@@ -52,7 +53,7 @@ int print_help(char *name)
 int print_version()
 {
         printf("archup %1.1f\n",VERSION_NUMBER);
-	printf("Copyright 2010 Rorschach <r0rschach@lavabit.com>\n");
+	printf("Copyright 2010 Rorschach <r0rschach@lavabit.com>,\n2011 Andrew Kravchuk <awkravchuk@gmail.com>\n");
         printf("License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n");
         printf("This is free software: you are free to change and redistribute it.\n");
         printf("There is NO WARRANTY, to the extent permitted by law.\n");
@@ -210,7 +211,7 @@ int main(int argc, char **argv)
 			output_string[strlen(output_string)-1] = '\0';
 		}
 		/* Constructs the notification. */
-		my_notify = notify_notification_new("New updates for Archlinux available!",output_string,icon,NULL);
+		my_notify = notify_notification_new("New updates for Archlinux available!",output_string,icon);
 		/* Sets the timeout until the notification disappears. */
 		notify_notification_set_timeout(my_notify,timeout);
 		/* We set the category.*/
